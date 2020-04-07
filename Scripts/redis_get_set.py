@@ -84,7 +84,7 @@ class RedisLocust(Locust):
         self.value = 'value1'
 
 class RedisLua(RedisLocust):
-    wait_time = constant(0.2)
+    wait_time = constant(0)
 
     class task_set(TaskSet):
         @task(2)
