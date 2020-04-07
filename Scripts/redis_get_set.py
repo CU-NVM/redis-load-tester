@@ -75,11 +75,11 @@ class RedisClient(object):
             length = 1
             events.request_success.fire(request_type=command, name=key, response_time=total_time, response_length=length)
         return result
-
+singleClient = RedisClient()
 class RedisLocust(Locust):
     def __init__(self, *args, **kwargs):
         super(RedisLocust, self).__init__(*args, **kwargs)
-        self.client = RedisClient()
+        self.client = singleClient
         self.key = 'key1'
         self.value = 'value1'
 
