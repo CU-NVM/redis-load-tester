@@ -40,7 +40,6 @@ class RedisClient(object):
             startup_nodes.append(temp)
         # startup_nodes = [{"host": host, "port": port}]
         # self.rc = redis.StrictRedis(host=host, port=port)
-        print("Cluster nodes", startup_nodes)
         self.rc = RedisCluster(startup_nodes=startup_nodes, decode_responses=True)
     def query(self, key, command='GET'):
         """Function to Test GET operation on Redis"""
