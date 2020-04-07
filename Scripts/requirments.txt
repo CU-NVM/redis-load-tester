@@ -1,3 +1,4 @@
 locustio
 argparse
 redis
+redis-py-cluster

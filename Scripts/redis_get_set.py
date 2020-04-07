@@ -15,6 +15,7 @@ import redis
 import gevent.monkey
 gevent.monkey.patch_all()
 from random import randint
+from rediscluster import RedisCluster
 
 def load_config(filepath):
     """For loading the connection details of Redis"""
@@ -28,8 +29,9 @@ configs = load_config(filename)
 
 class RedisClient(object):
     def __init__(self, host=configs["redis_host"], port=configs["redis_port"]):
-        self.rc = redis.StrictRedis(host=host, port=port)
-    
+        startup_nodes = [{"host": host, "port": port}]
+        # self.rc = redis.StrictRedis(host=host, port=port)
+        self.rc = RedisCluster(startup_nodes=startup_nodes, decode_responses=True)
     def query(self, key, command='GET'):
         """Function to Test GET operation on Redis"""
         result = None
