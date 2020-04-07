@@ -23,7 +23,7 @@ In this repository we have:-
 - **Scripts**:- Scripts folder contains all the codebase which is required for performance testing.
     - **[redis_set.py](./Scripts/redis_set.py)**:- This script is used to set random keys in Redis.
     - **[redis_read.py](./Scripts/redis_read.py)**:- This script is used to perform *GET* action on Redis.
-    - **[redis_get_set.py](./Scripts/redis_get_set.py)**: This script is used to perform *SET* and *GET* operation simultaneously on Redis.
+    - **[redis_get_set.py](Scripts/redis_get_set_cluster.py)**: This script is used to perform *SET* and *GET* operation simultaneously on Redis.
     - **[redis.json](./Scripts/redis.json)**:- This is a json file in which we have to define our connection details of Redis. I created this file because I believe that code should not be changed.
 
 - **Results**:- This is a directory in which I am dumping some of my test results.
