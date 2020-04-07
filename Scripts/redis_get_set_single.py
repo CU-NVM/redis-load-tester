@@ -25,7 +25,7 @@ def load_config(filepath):
     return configs
 
 
-filename = "redis.json"
+filename = "redis_single.json"
 
 configs = load_config(filename)
 

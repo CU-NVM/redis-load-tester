@@ -23,7 +23,7 @@ def load_config(filepath):
         configs = json.load(property_file)
     return configs
 
-filename = "redis.json"
+filename = "redis_cluster.json"
 
 configs = load_config(filename)
 
