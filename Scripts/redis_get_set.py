@@ -9,7 +9,7 @@ Author:- OpsTree Solutions
 
 import json
 import time
-from locust import Locust, events, between
+from locust import Locust, events, between, constant
 from locust.core import TaskSet, task
 import redis
 import gevent.monkey
@@ -73,7 +73,7 @@ class RedisLocust(Locust):
         self.value = 'value1'
 
 class RedisLua(RedisLocust):
-    wait_time = between(0,0)
+    wait_time = constant(0.2)
 
     class task_set(TaskSet):
         @task(2)
