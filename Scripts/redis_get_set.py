@@ -9,7 +9,7 @@ Author:- OpsTree Solutions
 
 import json
 import time
-from locust import Locust, events
+from locust import Locust, events, between
 from locust.core import TaskSet, task
 import redis
 import gevent.monkey
@@ -40,7 +40,8 @@ class RedisClient(object):
                 result = ''
         except Exception as e:
             total_time = int((time.time() - start_time) * 1000)
-            events.request_failure.fire(request_type=command, name=key, response_time=total_time, exception=e)
+            length = 0
+            events.request_failure.fire(request_type=command, name=key, response_time=total_time, exception=e, response_length=length)
         else:
             total_time = int((time.time() - start_time) * 1000)
             length = len(result)
@@ -57,7 +58,7 @@ class RedisClient(object):
                 result = ''
         except Exception as e:
             total_time = int((time.time() - start_time) * 1000)
-            events.request_failure.fire(request_type=command, name=key, response_time=total_time, exception=e)
+            events.request_failure.fire(request_type=command, name=key, response_time=total_time, exception=e, response_length=0)
         else:
             total_time = int((time.time() - start_time) * 1000)
             length = 1
@@ -72,8 +73,7 @@ class RedisLocust(Locust):
         self.value = 'value1'
 
 class RedisLua(RedisLocust):
-    min_wait = 100
-    max_wait = 100
+    wait_time = between(0,0)
 
     class task_set(TaskSet):
         @task(2)

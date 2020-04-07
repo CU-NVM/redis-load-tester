@@ -9,3 +9,7 @@ cd Scripts
 pip3 install -r requirments.txt
 
 
+#locust -f redis_get_set.py --master
+#
+#locust -f redis_get_set.py --slave --master-host=35.193.187.125
+
