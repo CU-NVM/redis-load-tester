@@ -29,8 +29,18 @@ configs = load_config(filename)
 
 class RedisClient(object):
     def __init__(self, host=configs["redis_host"], port=configs["redis_port"]):
-        startup_nodes = [{"host": host, "port": port}]
+        startup_nodes = []
+        hosts = host.split(',')
+        ports = port.split(',')
+        #making the cluster nodes
+        for i,val in enumerate(hosts):
+            temp = {}
+            temp["host"] = hosts[i]
+            temp["port"] = ports[i]
+            startup_nodes.append(temp)
+        # startup_nodes = [{"host": host, "port": port}]
         # self.rc = redis.StrictRedis(host=host, port=port)
+        print("Cluster nodes", startup_nodes)
         self.rc = RedisCluster(startup_nodes=startup_nodes, decode_responses=True)
     def query(self, key, command='GET'):
         """Function to Test GET operation on Redis"""
