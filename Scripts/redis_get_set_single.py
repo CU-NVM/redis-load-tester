@@ -9,7 +9,7 @@ Author:- OpsTree Solutions
 
 import json
 import time
-from locust import Locust, events
+from locust import Locust, events, constant
 from locust.core import TaskSet, task
 import redis
 import gevent.monkey
@@ -80,6 +80,8 @@ class RedisLocust(Locust):
 
 
 class RedisLua(RedisLocust):
+    wait_time = constant(0)
+
     class task_set(TaskSet):
         @task(2)
         def get_time(self):
