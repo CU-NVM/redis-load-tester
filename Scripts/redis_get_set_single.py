@@ -83,7 +83,7 @@ class RedisLua(RedisLocust):
     wait_time = constant(0)
 
     class task_set(TaskSet):
-        @task(2)
+        @task(1)
         def get_time(self):
             for i in range(100):
                 self.key = 'key' + str(i)
@@ -96,8 +96,8 @@ class RedisLua(RedisLocust):
                 self.value = 'value' + str(i)
                 self.client.write(self.key, self.value)
 
-        @task(1)
-        def get_key(self):
-            var = str(randint(1, 99))
-            self.key = 'key' + var
-            self.value = 'value' + var
+        # @task(1)
+        # def get_key(self):
+        #     var = str(randint(1, 99))
+        #     self.key = 'key' + var
+        #     self.value = 'value' + var
