@@ -49,7 +49,7 @@ class RedisClient(object):
             length = len(result)
             events.request_success.fire(request_type=command, name=key, response_time=total_time,
                                         response_length=length)
-        return result
+        return str(result)
 
     def write(self, key, value, command='SET'):
         """Function to Test SET operation on Redis"""
@@ -67,7 +67,7 @@ class RedisClient(object):
             length = 1
             events.request_success.fire(request_type=command, name=key, response_time=total_time,
                                         response_length=length)
-        return result
+        return str(result)
 
 
 class RedisLocust(Locust):
