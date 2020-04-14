@@ -80,7 +80,7 @@ class User(TaskSet):
     @task(1)
     def write(self):
         while True:
-            setKey = str(random.randrange(1, 2**20))
+            setKey = str(random.randrange(1, 4000000000))
             # self.keyss.append(setKey)
             self.client.write(setKey, setKey)
 
