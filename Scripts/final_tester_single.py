@@ -69,29 +69,25 @@ class RedisClient(object):
                                         response_length=length)
         return str(result)
 
+class User(TaskSet):
+    @task(1)
+    def get_time(self):
+        while True:
+            getKey = random.choice(self.keys)
+            self.client.query(getKey)
+
+    @task(1)
+    def write(self):
+        while True:
+            setKey = str(random.randrange(1, 2**20))
+            self.keys.append(setKey)
+            self.client.write(setKey, setKey)
 
 class RedisLocust(Locust):
     def __init__(self, *args, **kwargs):
         super(RedisLocust, self).__init__(*args, **kwargs)
         self.client = RedisClient()
         self.keys =[1,2,3]
+        wait_time = constant(0)
+        task_set= User
 
-
-class RedisLua(RedisLocust):
-    wait_time = constant(0)
-
-    class task_set(TaskSet):
-        def __init__(self):
-            self.keys = [1, 2, 3]
-        @task(1)
-        def get_time(self):
-            while True:
-                getKey = random.choice(self.keys)
-                self.client.query(getKey)
-
-        @task(1)
-        def write(self):
-            while True:
-                setKey = str(random.randrange(1, 2**20))
-                self.keys.append(setKey)
-                self.client.write(setKey, setKey)
