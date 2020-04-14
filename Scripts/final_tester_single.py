@@ -13,9 +13,8 @@ from locust import Locust, events, constant
 from locust.core import TaskSet, task
 import redis
 import gevent.monkey
-
 gevent.monkey.patch_all()
-from random import randint
+import random
 
 
 def load_config(filepath):
@@ -75,8 +74,7 @@ class RedisLocust(Locust):
     def __init__(self, *args, **kwargs):
         super(RedisLocust, self).__init__(*args, **kwargs)
         self.client = RedisClient()
-        self.key = 'key1'
-        self.value = 'value1'
+        self.keys =[]
 
 
 class RedisLua(RedisLocust):
@@ -85,13 +83,13 @@ class RedisLua(RedisLocust):
     class task_set(TaskSet):
         @task(1)
         def get_time(self):
-            for i in range(100):
-                self.key = 'key' + str(i)
-                self.client.query(self.key)
+            while True:
+                getKey = random.choice(self.keys)
+                self.client.query(getKey)
 
         @task(1)
         def write(self):
-            for i in range(100):
-                self.key = 'key' + str(i)
-                self.value = 'value' + str(i)
-                self.client.write(self.key, self.value)
+            while True:
+                setKey = random.randrange(1, 2**20)
+                self.keys.append(setKey)
+                self.client.write(setKey, setKey)
