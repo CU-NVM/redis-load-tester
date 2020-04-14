@@ -77,7 +77,7 @@ class User(TaskSet):
             getKey = random.choice(self.keyss)
             self.client.query(getKey)
 
-    @task(1)
+    @task(2)
     def write(self):
         while True:
             setKey = str(random.randrange(1, 2**20))
