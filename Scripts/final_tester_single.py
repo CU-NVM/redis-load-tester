@@ -49,7 +49,7 @@ class RedisClient(object):
             length = len(result)
             events.request_success.fire(request_type=command, name=key, response_time=total_time,
                                         response_length=length)
-        return str(result)
+        return result
 
     def write(self, key, value, command='SET'):
         """Function to Test SET operation on Redis"""
@@ -67,21 +67,21 @@ class RedisClient(object):
             length = 1
             events.request_success.fire(request_type=command, name=key, response_time=total_time,
                                         response_length=length)
-        return str(result)
+        return result
 
 class User(TaskSet):
-    keyss =["1","2"]
-    @task(1)
-    def get_time(self):
-        while True:
-            getKey = random.choice(self.keyss)
-            self.client.query(getKey)
+    # keyss =["1","2"]
+    # @task(1)
+    # def get_time(self):
+    #     while True:
+    #         getKey = random.choice(self.keyss)
+    #         self.client.query(getKey)
 
-    @task(2)
+    @task(1)
     def write(self):
         while True:
             setKey = str(random.randrange(1, 2**20))
-            self.keyss.append(setKey)
+            # self.keyss.append(setKey)
             self.client.write(setKey, setKey)
 
 class RedisLocust(Locust):
