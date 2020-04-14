@@ -79,8 +79,12 @@ class RedisLocust(Locust):
 
 class RedisLua(RedisLocust):
     wait_time = constant(0)
+    def __init__(self, *args, **kwargs):
+        super(RedisLua, self).__init__(*args, **kwargs)
+        self.keys =[1,2,3]
 
     class task_set(TaskSet):
+
         @task(1)
         def get_time(self):
             while True:
