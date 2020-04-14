@@ -70,7 +70,7 @@ class RedisClient(object):
         return str(result)
 
 class User(TaskSet):
-    keyss =[1,2]
+    keyss =["1","2"]
     @task(1)
     def get_time(self):
         while True:
