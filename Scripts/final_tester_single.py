@@ -70,8 +70,7 @@ class RedisClient(object):
         return str(result)
 
 class User(TaskSet):
-    def __init__(self):
-        self.keyss =[]
+    keyss =[]
     @task(1)
     def get_time(self):
         while True:
@@ -88,7 +87,6 @@ class User(TaskSet):
 class RedisLocust(Locust):
     def __init__(self, *args, **kwargs):
         self.client = RedisClient()
-        self.keys =[1,2,3]
         super(RedisLocust, self).__init__(*args, **kwargs)
 
     wait_time = constant(0)
