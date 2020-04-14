@@ -88,6 +88,6 @@ class RedisLocust(Locust):
         super(RedisLocust, self).__init__(*args, **kwargs)
         self.client = RedisClient()
         self.keys =[1,2,3]
-        wait_time = constant(0)
-        task_set= User
 
+    wait_time = constant(0)
+    task_set = User
