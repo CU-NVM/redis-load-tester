@@ -1,5 +1,6 @@
 #!/bin/bash
 
+ulimit -n 999999
 sudo apt-get update
 sudo apt-get install -y python3 python3-pip git
 git clone https://github.com/CU-NVM/redis-load-tester
