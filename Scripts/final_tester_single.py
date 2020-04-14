@@ -70,10 +70,11 @@ class RedisClient(object):
         return str(result)
 
 class User(TaskSet):
-    keyss =[]
+    keyss =[1,2]
     @task(1)
     def get_time(self):
         while True:
+            print(self.keyss)
             getKey = random.choice(self.keyss)
             self.client.query(getKey)
 
