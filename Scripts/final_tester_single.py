@@ -94,4 +94,4 @@ class RedisLua(RedisLocust):
             while True:
                 setKey = random.randrange(1, 2**20)
                 # self.keys.append(setKey)
-                self.client.write(setKey, setKey)
+                self.client.write(setKey, str(setKey))
