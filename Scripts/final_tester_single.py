@@ -70,17 +70,19 @@ class RedisClient(object):
         return str(result)
 
 class User(TaskSet):
+    def __init__(self):
+        self.keyss =[]
     @task(1)
     def get_time(self):
         while True:
-            getKey = random.choice(self.keys)
+            getKey = random.choice(self.keyss)
             self.client.query(getKey)
 
     @task(1)
     def write(self):
         while True:
             setKey = str(random.randrange(1, 2**20))
-            self.keys.append(setKey)
+            self.keyss.append(setKey)
             self.client.write(setKey, setKey)
 
 class RedisLocust(Locust):
