@@ -79,19 +79,19 @@ class RedisLocust(Locust):
 
 class RedisLua(RedisLocust):
     wait_time = constant(0)
-    # def __init__(self):
-    #     super(RedisLua, self).__init__()
+    def __init__(self):
+        super(RedisLua, self).__init__()
 
     class task_set(TaskSet):
-        # @task(1)
-        # def get_time(self):
-        #     while True:
-        #         getKey = random.choice(self.keys)
-        #         self.client.query(getKey)
+        @task(1)
+        def get_time(self):
+            while True:
+                getKey = random.choice(self.keys)
+                self.client.query(getKey)
 
         @task(1)
         def write(self):
             while True:
                 setKey = random.randrange(1, 2**20)
-                # self.keys.append(setKey)
+                self.keys.append(setKey)
                 self.client.write(setKey, setKey)
