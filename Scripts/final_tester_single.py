@@ -9,13 +9,14 @@ Author:- OpsTree Solutions
 
 import json
 import time
-from locust import Locust, events, constant
+from locust import Locust, events, constant, stats
 from locust.core import TaskSet, task
 import redis
 import gevent.monkey
 gevent.monkey.patch_all()
 import random
 
+stats.CSV_STATS_INTERVAL_SEC = 10
 
 def load_config(filepath):
     """For loading the connection details of Redis"""
@@ -67,7 +68,7 @@ class RedisClient(object):
             length = 1
             events.request_success.fire(request_type=command, name=key, response_time=total_time,
                                         response_length=length)
-        # return result
+        return result
 
 class User(TaskSet):
     # keyss =["1","2"]

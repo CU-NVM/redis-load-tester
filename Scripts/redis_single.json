@@ -1,5 +1,5 @@
 {
-    "redis_host": "35.226.11.95",
+    "redis_host": "35.206.101.216",
     "redis_port": "6069",
     "redis_password": ""
 }
