@@ -67,7 +67,7 @@ class RedisClient(object):
             length = 1
             events.request_success.fire(request_type=command, name=key, response_time=total_time,
                                         response_length=length)
-        return result
+        # return result
 
 class User(TaskSet):
     # keyss =["1","2"]
@@ -79,9 +79,10 @@ class User(TaskSet):
 
     @task(1)
     def write(self):
-            setKey = str(random.randrange(1, 4000000000))
-            # self.keyss.append(setKey)
-            self.client.write(setKey, setKey)
+            while True:
+                setKey = str(random.randrange(1, 4000000000))
+                # self.keyss.append(setKey)
+                self.client.write(setKey, setKey)
 
 class RedisLocust(Locust):
     def __init__(self, *args, **kwargs):
