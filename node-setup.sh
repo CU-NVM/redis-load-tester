@@ -12,5 +12,6 @@ pip3 install -r requirments.txt
 
 #locust -f redis_get_set_cluster.py --master
 #
-#locust -f redis_get_set_cluster.py --slave --master-host=35.193.187.125
+#locust -f final_tester_single.py --slave --master-host=35.225.161.228
+
 

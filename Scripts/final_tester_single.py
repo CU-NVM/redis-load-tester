@@ -16,7 +16,7 @@ import gevent.monkey
 gevent.monkey.patch_all()
 import random
 
-stats.CSV_STATS_INTERVAL_SEC = 10
+# stats.CSV_STATS_INTERVAL_SEC = 10
 
 def load_config(filepath):
     """For loading the connection details of Redis"""
